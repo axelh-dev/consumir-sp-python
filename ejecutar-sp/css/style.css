@@ -1,0 +1,33 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-sp{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.container-form{
+    width: 450px;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 2rem;
+}
+
+.container-form-sp{
+    width: 600px;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+
+@media only screen and (min-width: 600px) {
+    .container-sp {
+      display: flex; 
+      flex-direction: column;
+    }
+  }
