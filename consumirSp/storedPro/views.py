@@ -7,6 +7,32 @@ from django.http import JsonResponse
 # Ejecuta el SP
 from django.db import connection
 cursor = connection.cursor()
+
+def spBackupBD(request, Dir, TpoBack ):
+    #
+    if Dir is None or TpoBack is None:
+        return JsonResponse({'error': 'Se requieren todos los parámetros'}, status=400)
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('EXEC DBBackupFull_banco @Dir=%s, @TpoBack=%s', [Dir, TpoBack])
+            if cursor.description is not None:
+                results = cursor.fetchall()
+            else:
+                results = None
+        response_data = {
+            'message': 'BackUp Exitosa',
+            'results': results,
+        }
+        return JsonResponse(response_data)
+    except Exception as e:
+        error_message = str(e)
+        start_index = error_message.find("ERROR:")
+        if start_index != -1:
+            error_message = error_message[start_index:]
+        return JsonResponse({'error': error_message, 'results': None}, status=500)
+
+
+
 def spMovimientos(request, cuentaOrigen, cuentaDestino, monto):
     #
     if cuentaOrigen is None or cuentaDestino is None or monto is None:

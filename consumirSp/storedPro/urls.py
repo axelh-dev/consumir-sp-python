@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls, get_schema_view
 from rest_framework import routers, permissions
-from .views import MovimientosViewSet, ClienteViewSet, cuentaViewSet, spMovimientos,MonedaViewSet,CuentaViewSet, spCliente, spCuenta, regionViewSet
+from .views import MovimientosViewSet, ClienteViewSet, cuentaViewSet, spBackupBD, spMovimientos,MonedaViewSet,CuentaViewSet, spCliente, spCuenta, regionViewSet
 
 
 router = routers.DefaultRouter()
@@ -24,5 +24,6 @@ urlpatterns = [
     path('spMovimiento/<cuentaOrigen>/<cuentaDestino>/<monto>/', spMovimientos, name='Ejecutar Sp' ),
     path('spCliente/<nombre>/<apellido>/<direccion>/<TipoCuenta>/<TipoMoneda>/<telefono>/<Region>/<Fecha_Nac>/', spCliente, name='spCliente'),
     path('spCuenta/<ClienteID>/<TipoCuenta>/<TipoMoneda>/<Region>', spCuenta, name='spCuenta'),
+    path('spbackup/<Dir>/<TpoBack>/', spBackupBD, name='spbackup'),
 
 ]
